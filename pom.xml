@@ -101,5 +101,12 @@
 			<groupId>junit</groupId>
 			<version>4.11</version>
 		</dependency>
+		
+		<!-- Dependencia de integração de sprong com junit -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.1.0.RELEASE</version>
+		</dependency>
 	</dependencies>
 </project>

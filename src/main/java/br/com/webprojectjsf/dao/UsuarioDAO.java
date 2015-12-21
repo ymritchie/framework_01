@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.webprojectjsf.entidades.Usuario;
 
@@ -20,17 +21,27 @@ public class UsuarioDAO {
 		this.em = em;
 	}
 	
+	
+	
+	public UsuarioDAO() {
+		
+	}
+
+
+
+	@Transactional
 	public Usuario salvar(Usuario usuario){
-		em.getTransaction().begin();
 		Usuario u = em.merge(usuario);
-		em.getTransaction().commit();
 		return u;
 	}
 	
-	public void excluir(Usuario usuario){
-		em.getTransaction().begin();
-		em.remove(usuario);
-		em.getTransaction().commit();
+	@Transactional
+	public void excluir(Usuario usuario) throws DAOException{
+		try {
+			em.remove(usuario);
+		} catch(IllegalArgumentException e) {
+			throw new DAOException(e);
+		}
 	}
 	
 	public Usuario buscarPorId(int id){
